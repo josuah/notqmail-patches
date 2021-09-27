@@ -12,6 +12,7 @@ echo "<table>"
 # table header
 
 echo "	<tr>"
+echo "		<th>patch</th>"
 while read branch; do
 	commit=$(git -C notqmail.git rev-parse $branch)
 	echo "		<th><a href="$url/$commit">$branch</a></th>"
@@ -24,6 +25,7 @@ url=https://github.com/notqmail/notqmail/commits
 for patch in patch/*; do
 	patch=$(basename "$patch" .patch)
 	echo "	<tr>"
+	echo "		<td>$patch</td>"
 	while read branch; do
 		commit=$(git -C notqmail.git rev-parse $branch)
 		result=$(tail -n 1 notqmail-$commit-$patch.log | grep -x success || echo failure)
