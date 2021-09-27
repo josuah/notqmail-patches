@@ -79,10 +79,10 @@ builds notqmail for each combination of patch and branch below.
 		<td><a href=log/aab15b1fea8a6c48953bf152a334d6a1840184c3-spp-smtpauth-eh.log>error</a></td>
 	</tr>
 	<tr>
-		<td>spp-smtpauth-tls-20060105</td>
-		<td><a href=log/8c53cd40a3329d682a905decb1f8734fa1ba2e9a-spp-smtpauth-tls-20060105.log>error</a></td>
-		<td><a href=log/e77f33bd5f614e967b0716a72dd706462d36a477-spp-smtpauth-tls-20060105.log>error</a></td>
-		<td><a href=log/aab15b1fea8a6c48953bf152a334d6a1840184c3-spp-smtpauth-tls-20060105.log>error</a></td>
+		<td>spp-smtpauth-tls</td>
+		<td><a href=log/8c53cd40a3329d682a905decb1f8734fa1ba2e9a-spp-smtpauth-tls.log>error</a></td>
+		<td><a href=log/e77f33bd5f614e967b0716a72dd706462d36a477-spp-smtpauth-tls.log>error</a></td>
+		<td><a href=log/aab15b1fea8a6c48953bf152a334d6a1840184c3-spp-smtpauth-tls.log>error</a></td>
 	</tr>
 	<tr>
 		<td>spp-smtpauth</td>
