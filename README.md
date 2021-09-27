@@ -1,6 +1,9 @@
 Notqmail patch checker
 ======================
-For maintaining patch compatibility and still permit the source to evolve, this Makefile builds notqmail for each combination of patch and branch below.
+For maintaining
+[patch](https://github.com/notqmail/notqmail/wiki/Patches)
+compatibility and still permit the source to evolve, this Makefile
+builds notqmail for each combination of patch and branch below.
 
 <table>
 	<tr>
