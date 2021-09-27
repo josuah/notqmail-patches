@@ -37,7 +37,7 @@ done
 
 echo "</table>"
 
-cat <<EOF
+cat <<'EOF'
 
 Testing an individual branch/patch combo
 ----------------------------------------

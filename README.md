@@ -97,3 +97,47 @@ builds notqmail for each combination of patch and branch below.
 		<td><a href=log/aab15b1fea8a6c48953bf152a334d6a1840184c3-spp.log>error</a></td>
 	</tr>
 </table>
+
+Testing an individual branch/patch combo
+----------------------------------------
+```
+make BRANCH=refactoring PATCH=big-todo
+```
+
+This will produce log result in `log/$commit-big-todo.log`.
+
+Testing all patches
+-------------------
+```
+make patches BRANCH=refactoring
+```
+
+For instance, after a commit, for checking if patches still
+apply or if they need a rework.
+
+Testing all branches
+--------------------
+```
+make branches PATCH=big-todo
+```
+
+For instance, after changing a patch to check if it now works
+better on notqmail.
+
+Branches tested are listed in `conf-branch`.
+
+Testing all patches and all branches
+------------------------------------
+```
+make everything
+```
+
+Checking every merge request
+----------------------------
+```
+make brokemaster BRANCH=refactoring
+```
+
+This can be used in a script that automatically runs on merge request.
+This will return an error only if the current branch broke more patches
+than what master did already.
