@@ -3,8 +3,6 @@ Notqmail patch checker
 ======================
 For maintaining patch compatibility and still permit the source to evolve, this Makefile builds notqmail for each combination of patch and branch below.
 
-	running at $(date +'%Y-%m-%d %H:%M:%S') on $(uname -a)
-
 EOF
 
 echo "<table>"
