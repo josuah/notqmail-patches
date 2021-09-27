@@ -4,7 +4,7 @@ LOG = notqmail-${REF}-${PATCH}.log
 
 all:v
 	@test -n '${BRANCH}' -a -n '${PATCH}'
-	@make log COMMIT=${REF} PATCH=${PATCH}
+	@make log/${REF}-${PATCH}.log COMMIT=${REF} PATCH=${PATCH}
 
 everything:v
 	@xargs -I {} -n 1 make patches BRANCH={} <conf-branch
@@ -18,8 +18,6 @@ patches:v
 	@ls patch | sed 's/.patch$$//' |\
 	 xargs -I {} -n 1 make BRANCH=${BRANCH} PATCH={}
 
-log:v \
-log/${COMMIT}-${PATCH}.log
 log/${COMMIT}-${PATCH}.log:
 	@echo building $@
 	@-make build COMMIT=${COMMIT} PATCH=${PATCH} >$@.tmp 2>&1
@@ -40,6 +38,11 @@ notqmail.git:
 
 README.md:v
 	sh README.sh >$@
+
+brokemaster:v
+	@make patches BRANCH=${BRANCH}
+	@make patches BRANCH=master
+	sh brokemaster.sh ${BRANCH}
 
 clean:v
 	rm -rf notqmail-*/
