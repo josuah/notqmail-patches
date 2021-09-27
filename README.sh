@@ -26,8 +26,8 @@ for patch in patch/*; do
 	echo "		<td>$patch</td>"
 	while read branch; do
 		commit=$(git -C notqmail.git rev-parse $branch)
-		result=$(tail -n 1 notqmail-$commit-$patch.log | grep -x success || echo failure)
-		echo "		<td><a href="notqmail-$commit-$patch.log">$result</a></td>"
+		result=$(tail -n 1 log/$commit-$patch.log | grep -x ok || echo error)
+		echo "		<td><a href="log/$commit-$patch.log">$result</a></td>"
 	done <conf-branch
 	echo "	</tr>"
 done

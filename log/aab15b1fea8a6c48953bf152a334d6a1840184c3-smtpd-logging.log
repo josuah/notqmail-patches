@@ -1,81 +1,74 @@
-rm -rf notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-big-todo
+rm -rf notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-smtpd-logging
 git -C notqmail.git fetch origin aab15b1fea8a6c48953bf152a334d6a1840184c3
 From https://github.com/notqmail/notqmail
  * branch            aab15b1fea8a6c48953bf152a334d6a1840184c3 -> FETCH_HEAD
-git -C notqmail.git archive --prefix=notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-big-todo/ aab15b1fea8a6c48953bf152a334d6a1840184c3 | tar xf -
-cd notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-big-todo; patch -f -p 1 <../patch/big-todo.patch
+git -C notqmail.git archive --prefix=notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-smtpd-logging/ aab15b1fea8a6c48953bf152a334d6a1840184c3 | tar xf -
+cd notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-smtpd-logging; patch -f -p 1 <../patch/smtpd-logging.patch
 Hmm...  Looks like a unified diff to me...
 The text leading up to this was:
 --------------------------
-|Note to readers: After you apply this patch, your queue will no longer
-|be readable in its current state.  So, either install this into
-|/var/qmail2 and run both qmails until the queue is emptied on the old
-|one, or else accept that your current queue will have to be destroyed
-|and ``rm -rf /var/qmail/queue; make setup''.
-|
-|
-|From: Bruce Guenter <bruceg@em.ca>
-|To: Russell Nelson <nelson@crynwr.com>
-|Subject: Missing piece of your big-todo patch
-|Date: Tue, 3 Aug 1999 08:12:11 -0600
-|
-|Greetings.
-|
-|While testing the performance of a big todo directory, I observed that
-|qmail-qstat miscounted the number of messages in the todo directory.
-|I've appended the necessary patch to yours.
-|-- 
-|Bruce Guenter <bruceg@em.ca>                       http://em.ca/~bruceg/
-|
-|
-|diff -u orig/qmail-clean.c ./qmail-clean.c
-|--- orig/qmail-clean.c	Tue Apr 15 01:05:23 1997
-|+++ ./qmail-clean.c	Thu Jul 10 16:20:33 1997
+|This patch written by Andrew Richards 2010. For more details please
+|see http://free.acrconsulting.co.uk/
+|diff -Nru netqmail-1.06/errbits.c netqmail-1.06_logmsg13/errbits.c
+|--- netqmail-1.06/errbits.c	1970-01-01 01:00:00.000000000 +0100
+|+++ netqmail-1.06_logmsg13/errbits.c	2010-02-10 17:35:19.000000000 +0000
 --------------------------
-Patching file qmail-clean.c using Plan A...
-Hunk #1 succeeded at 73.
+(Creating file errbits.c...)
+Patching file errbits.c using Plan A...
+Empty context always matches.
+Hunk #1 succeeded at 1.
 Hmm...  The next patch looks like a unified diff to me...
 The text leading up to this was:
 --------------------------
-|diff -u orig/hier.c ./hier.c
-|--- orig/hier.c	Tue Apr 15 01:05:23 1997
-|+++ ./hier.c	Tue Jul  8 13:40:50 1997
+|diff -Nru netqmail-1.06/errbits.h netqmail-1.06_logmsg13/errbits.h
+|--- netqmail-1.06/errbits.h	1970-01-01 01:00:00.000000000 +0100
+|+++ netqmail-1.06_logmsg13/errbits.h	2010-02-10 18:20:14.000000000 +0000
 --------------------------
-Patching file hier.c using Plan A...
-Hunk #1 succeeded at 55 with fuzz 1 (offset -45 lines).
+(Creating file errbits.h...)
+Patching file errbits.h using Plan A...
+Empty context always matches.
+Hunk #1 succeeded at 1.
 Hmm...  The next patch looks like a unified diff to me...
 The text leading up to this was:
 --------------------------
-|diff -u orig/qmail-queue.c ./qmail-queue.c
-|--- orig/qmail-queue.c	Tue Apr 15 01:05:23 1997
-|+++ ./qmail-queue.c	Tue Jul  8 13:33:17 1997
+|diff -Nru netqmail-1.06/Makefile netqmail-1.06_logmsg13/Makefile
+|--- netqmail-1.06/Makefile	2007-11-30 20:22:54.000000000 +0000
+|+++ netqmail-1.06_logmsg13/Makefile	2009-08-31 22:30:46.000000000 +0100
 --------------------------
-Patching file qmail-queue.c using Plan A...
-Hunk #1 succeeded at 190 with fuzz 2 (offset 10 lines).
+Patching file Makefile using Plan A...
+Hunk #1 succeeded at 555 (offset 47 lines).
+Hunk #2 succeeded at 1545 (offset 6 lines).
 Hmm...  The next patch looks like a unified diff to me...
 The text leading up to this was:
 --------------------------
-|diff -u orig/qmail-send.c ./qmail-send.c
-|--- orig/qmail-send.c	Tue Apr 15 01:05:23 1997
-|+++ ./qmail-send.c	Wed Jul  9 02:04:09 1997
+|diff -Nru netqmail-1.06/qmail-smtpd.c netqmail-1.06_logmsg13/qmail-smtpd.c
+|--- netqmail-1.06/qmail-smtpd.c	2007-11-30 20:22:54.000000000 +0000
+|+++ netqmail-1.06_logmsg13/qmail-smtpd.c	2010-02-15 22:27:09.000000000 +0000
 --------------------------
-Patching file qmail-send.c using Plan A...
-Hunk #1 succeeded at 96 (offset -5 lines).
-Hunk #2 succeeded at 1221 (offset -21 lines).
-Hunk #3 succeeded at 1246 (offset -5 lines).
-Hunk #4 succeeded at 1242 (offset -21 lines).
-Hunk #5 succeeded at 1275 (offset -5 lines).
-Hunk #6 succeeded at 1270 (offset -21 lines).
+Patching file qmail-smtpd.c using Plan A...
+Hunk #1 succeeded at 23.
+Hunk #2 succeeded at 61.
+Hunk #3 succeeded at 161.
+Hunk #4 succeeded at 215.
+Hunk #5 succeeded at 301.
+Hunk #6 succeeded at 346.
+Hunk #7 succeeded at 367.
+Hunk #8 succeeded at 375.
+Hunk #9 succeeded at 452.
+Hunk #10 succeeded at 467.
+Hunk #11 succeeded at 481.
+Hunk #12 succeeded at 509.
 Hmm...  The next patch looks like a unified diff to me...
 The text leading up to this was:
 --------------------------
-|--- qmail-1.03/qmail-qstat.sh.orig	Tue Aug  3 08:06:47 1999
-|+++ qmail-1.03/qmail-qstat.sh	Tue Aug  3 08:06:38 1999
+|diff -Nru netqmail-1.06/TARGETS netqmail-1.06_logmsg13/TARGETS
+|--- netqmail-1.06/TARGETS	1998-06-15 11:53:16.000000000 +0100
+|+++ netqmail-1.06_logmsg13/TARGETS	2009-08-31 22:30:46.000000000 +0100
 --------------------------
-Patching file qmail-qstat.sh using Plan A...
-Hunk #1 succeeded at 1 with fuzz 1 (offset -2 lines).
+Patching file TARGETS using Plan A...
+Hunk #1 succeeded at 95 (offset -1 lines).
 done
-make -C notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-big-todo it
+make -C notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-smtpd-logging it
 ( cat warn-auto.sh;  echo CC=\'`head -1 conf-cc`\';  echo LD=\'`head -1 conf-ld`\'  ) > auto-ccld.sh
 cat auto-ccld.sh make-load.sh > make-load
 chmod 755 make-load
@@ -318,7 +311,7 @@ qmail-clean.c:53: warning: return type of 'main' is not 'int'
 In file included from qmail-send.c:29:
 qsutil.h:5: warning: conflicting types for built-in function 'log2'
 qmail-send.c: In function 'main':
-qmail-send.c:1510: warning: return type of 'main' is not 'int'
+qmail-send.c:1516: warning: return type of 'main' is not 'int'
 ./compile qsutil.c
 In file included from qsutil.c:4:
 qsutil.h:5: warning: conflicting types for built-in function 'log2'
@@ -457,8 +450,9 @@ qmail-qmtpd.c:35: warning: incompatible implicit declaration of built-in functio
 ./load qmail-qmtpd rcpthosts.o control.o constmap.o  received.o date822fmt.o now.o qmail.o cdb.a fd.a wait.a  datetime.a open.a getln.a sig.a case.a env.a stralloc.a  alloc.a substdio.a error.a str.a fs.a auto_qmail.o 
 ./compile qmail-smtpd.c
 qmail-smtpd.c: In function 'main':
-qmail-smtpd.c:412: warning: return type of 'main' is not 'int'
-./load qmail-smtpd rcpthosts.o commands.o timeoutread.o  timeoutwrite.o ip.o ipme.o ipalloc.o control.o constmap.o  received.o date822fmt.o now.o qmail.o cdb.a fd.a wait.a  datetime.a getln.a open.a sig.a case.a env.a stralloc.a  alloc.a substdio.a error.a str.a fs.a auto_qmail.o  `cat  socket.lib`
+qmail-smtpd.c:510: warning: return type of 'main' is not 'int'
+./compile errbits.c
+./load qmail-smtpd rcpthosts.o commands.o timeoutread.o  timeoutwrite.o ip.o ipme.o ipalloc.o control.o constmap.o  received.o date822fmt.o now.o qmail.o cdb.a fd.a wait.a  datetime.a getln.a open.a sig.a case.a env.a stralloc.a  errbits.o  alloc.a substdio.a error.a str.a fs.a auto_qmail.o  `cat  socket.lib`
 ./compile sendmail.c
 sendmail.c: In function 'main':
 sendmail.c:86: warning: return type of 'main' is not 'int'
@@ -593,4 +587,4 @@ cat binm3.sh  | sed s}QMAIL}"`head -1 conf-qmail`"}g  > binm3
 chmod 755 binm3
 cat binm3+df.sh  | sed s}QMAIL}"`head -1 conf-qmail`"}g  > binm3+df
 chmod 755 binm3+df
-success
+ok

@@ -1,54 +1,33 @@
-rm -rf notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-netqmail-spp
+rm -rf notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-badmailfrom-x-relayclient
 git -C notqmail.git fetch origin aab15b1fea8a6c48953bf152a334d6a1840184c3
 From https://github.com/notqmail/notqmail
  * branch            aab15b1fea8a6c48953bf152a334d6a1840184c3 -> FETCH_HEAD
-git -C notqmail.git archive --prefix=notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-netqmail-spp/ aab15b1fea8a6c48953bf152a334d6a1840184c3 | tar xf -
-cd notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-netqmail-spp; patch -f -p 1 <../patch/netqmail-spp.patch
+git -C notqmail.git archive --prefix=notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-badmailfrom-x-relayclient/ aab15b1fea8a6c48953bf152a334d6a1840184c3 | tar xf -
+cd notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-badmailfrom-x-relayclient; patch -f -p 1 <../patch/badmailfrom-x-relayclient.patch
 Hmm...  Looks like a unified diff to me...
 The text leading up to this was:
 --------------------------
-|--- Makefile	2004-08-10 11:45:55.000000000 +0200
-|+++ Makefile	2005-01-19 12:58:40.000000000 +0100
---------------------------
-Patching file Makefile using Plan A...
-Hunk #1 succeeded at 1584 with fuzz 1 (offset 53 lines).
-Hunk #2 succeeded at 1611 (offset 53 lines).
-Hmm...  The next patch looks like a unified diff to me...
-The text leading up to this was:
---------------------------
-|--- qmail-smtpd.c	2004-08-10 11:45:55.000000000 +0200
-|+++ qmail-smtpd.c	2006-04-01 22:22:59.000000000 +0200
+|This patch disables the badmailfrom check where RELAYCLIENT is set.
+|
+|This allows you to put your own domain in badmailfrom, but still allow your
+|customers to relay through your mail server.
+|
+|Also Works with the qmail-smtpd-auth patch from http://members.elysium.pl/brush/qmail-smtpd-auth/
+|so your smtp authenticated users are also permitted to relay.
+|
+|The basic idea behind the need for this concept is so you can put your own domain in badmailfrom,
+|and still allow your trusted users to be able to send mail through your mail server.
+|
+|Jeremy Kitchen -- kitchen@scriptkitchen.com 12/23/2003
+|
+|diff -urN qmail-1.03.orig/qmail-smtpd.c qmail-1.03/qmail-smtpd.c
+|--- qmail-1.03.orig/qmail-smtpd.c	1998-06-15 05:53:16.000000000 -0500
+|+++ qmail-1.03/qmail-smtpd.c	2003-12-23 16:41:44.386786384 -0600
 --------------------------
 Patching file qmail-smtpd.c using Plan A...
-Hunk #1 succeeded at 23.
-Hunk #2 succeeded at 114.
-Hunk #3 succeeded at 223.
-Hunk #4 succeeded at 261.
-Hunk #5 succeeded at 387.
-Hunk #6 succeeded at 395.
-Hunk #7 succeeded at 432.
-Hmm...  The next patch looks like a unified diff to me...
-The text leading up to this was:
---------------------------
-|--- qmail-spp.c	1970-01-01 01:00:00.000000000 +0100
-|+++ qmail-spp.c	2006-04-01 22:46:52.000000000 +0200
---------------------------
-(Creating file qmail-spp.c...)
-Patching file qmail-spp.c using Plan A...
-Empty context always matches.
-Hunk #1 succeeded at 1.
-Hmm...  The next patch looks like a unified diff to me...
-The text leading up to this was:
---------------------------
-|--- qmail-spp.h	1970-01-01 01:00:00.000000000 +0100
-|+++ qmail-spp.h	2005-01-19 12:53:44.000000000 +0100
---------------------------
-(Creating file qmail-spp.h...)
-Patching file qmail-spp.h using Plan A...
-Empty context always matches.
-Hunk #1 succeeded at 1.
+Hunk #1 succeeded at 240.
 done
-make -C notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-netqmail-spp it
+make -C notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-badmailfrom-x-relayclient it
 ( cat warn-auto.sh;  echo CC=\'`head -1 conf-cc`\';  echo LD=\'`head -1 conf-ld`\'  ) > auto-ccld.sh
 cat auto-ccld.sh make-load.sh > make-load
 chmod 755 make-load
@@ -430,9 +409,8 @@ qmail-qmtpd.c:35: warning: incompatible implicit declaration of built-in functio
 ./load qmail-qmtpd rcpthosts.o control.o constmap.o  received.o date822fmt.o now.o qmail.o cdb.a fd.a wait.a  datetime.a open.a getln.a sig.a case.a env.a stralloc.a  alloc.a substdio.a error.a str.a fs.a auto_qmail.o 
 ./compile qmail-smtpd.c
 qmail-smtpd.c: In function 'main':
-qmail-smtpd.c:430: warning: return type of 'main' is not 'int'
-./compile qmail-spp.c
-./load qmail-smtpd rcpthosts.o commands.o timeoutread.o  timeoutwrite.o ip.o ipme.o ipalloc.o control.o constmap.o  received.o date822fmt.o now.o qmail.o cdb.a fd.a wait.a  datetime.a getln.a open.a sig.a case.a qmail-spp.o env.a stralloc.a  alloc.a substdio.a error.a str.a fs.a auto_qmail.o  str.a `cat socket.lib`
+qmail-smtpd.c:412: warning: return type of 'main' is not 'int'
+./load qmail-smtpd rcpthosts.o commands.o timeoutread.o  timeoutwrite.o ip.o ipme.o ipalloc.o control.o constmap.o  received.o date822fmt.o now.o qmail.o cdb.a fd.a wait.a  datetime.a getln.a open.a sig.a case.a env.a stralloc.a  alloc.a substdio.a error.a str.a fs.a auto_qmail.o  `cat  socket.lib`
 ./compile sendmail.c
 sendmail.c: In function 'main':
 sendmail.c:86: warning: return type of 'main' is not 'int'
@@ -567,4 +545,4 @@ cat binm3.sh  | sed s}QMAIL}"`head -1 conf-qmail`"}g  > binm3
 chmod 755 binm3
 cat binm3+df.sh  | sed s}QMAIL}"`head -1 conf-qmail`"}g  > binm3+df
 chmod 755 binm3+df
-success
+ok

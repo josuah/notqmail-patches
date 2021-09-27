@@ -1,74 +1,54 @@
-rm -rf notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-smtpd-logging
+rm -rf notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-netqmail-spp
 git -C notqmail.git fetch origin aab15b1fea8a6c48953bf152a334d6a1840184c3
 From https://github.com/notqmail/notqmail
  * branch            aab15b1fea8a6c48953bf152a334d6a1840184c3 -> FETCH_HEAD
-git -C notqmail.git archive --prefix=notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-smtpd-logging/ aab15b1fea8a6c48953bf152a334d6a1840184c3 | tar xf -
-cd notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-smtpd-logging; patch -f -p 1 <../patch/smtpd-logging.patch
+git -C notqmail.git archive --prefix=notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-netqmail-spp/ aab15b1fea8a6c48953bf152a334d6a1840184c3 | tar xf -
+cd notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-netqmail-spp; patch -f -p 1 <../patch/netqmail-spp.patch
 Hmm...  Looks like a unified diff to me...
 The text leading up to this was:
 --------------------------
-|This patch written by Andrew Richards 2010. For more details please
-|see http://free.acrconsulting.co.uk/
-|diff -Nru netqmail-1.06/errbits.c netqmail-1.06_logmsg13/errbits.c
-|--- netqmail-1.06/errbits.c	1970-01-01 01:00:00.000000000 +0100
-|+++ netqmail-1.06_logmsg13/errbits.c	2010-02-10 17:35:19.000000000 +0000
---------------------------
-(Creating file errbits.c...)
-Patching file errbits.c using Plan A...
-Empty context always matches.
-Hunk #1 succeeded at 1.
-Hmm...  The next patch looks like a unified diff to me...
-The text leading up to this was:
---------------------------
-|diff -Nru netqmail-1.06/errbits.h netqmail-1.06_logmsg13/errbits.h
-|--- netqmail-1.06/errbits.h	1970-01-01 01:00:00.000000000 +0100
-|+++ netqmail-1.06_logmsg13/errbits.h	2010-02-10 18:20:14.000000000 +0000
---------------------------
-(Creating file errbits.h...)
-Patching file errbits.h using Plan A...
-Empty context always matches.
-Hunk #1 succeeded at 1.
-Hmm...  The next patch looks like a unified diff to me...
-The text leading up to this was:
---------------------------
-|diff -Nru netqmail-1.06/Makefile netqmail-1.06_logmsg13/Makefile
-|--- netqmail-1.06/Makefile	2007-11-30 20:22:54.000000000 +0000
-|+++ netqmail-1.06_logmsg13/Makefile	2009-08-31 22:30:46.000000000 +0100
+|--- Makefile	2004-08-10 11:45:55.000000000 +0200
+|+++ Makefile	2005-01-19 12:58:40.000000000 +0100
 --------------------------
 Patching file Makefile using Plan A...
-Hunk #1 succeeded at 555 (offset 47 lines).
-Hunk #2 succeeded at 1545 (offset 6 lines).
+Hunk #1 succeeded at 1584 with fuzz 1 (offset 53 lines).
+Hunk #2 succeeded at 1611 (offset 53 lines).
 Hmm...  The next patch looks like a unified diff to me...
 The text leading up to this was:
 --------------------------
-|diff -Nru netqmail-1.06/qmail-smtpd.c netqmail-1.06_logmsg13/qmail-smtpd.c
-|--- netqmail-1.06/qmail-smtpd.c	2007-11-30 20:22:54.000000000 +0000
-|+++ netqmail-1.06_logmsg13/qmail-smtpd.c	2010-02-15 22:27:09.000000000 +0000
+|--- qmail-smtpd.c	2004-08-10 11:45:55.000000000 +0200
+|+++ qmail-smtpd.c	2006-04-01 22:22:59.000000000 +0200
 --------------------------
 Patching file qmail-smtpd.c using Plan A...
 Hunk #1 succeeded at 23.
-Hunk #2 succeeded at 61.
-Hunk #3 succeeded at 161.
-Hunk #4 succeeded at 215.
-Hunk #5 succeeded at 301.
-Hunk #6 succeeded at 346.
-Hunk #7 succeeded at 367.
-Hunk #8 succeeded at 375.
-Hunk #9 succeeded at 452.
-Hunk #10 succeeded at 467.
-Hunk #11 succeeded at 481.
-Hunk #12 succeeded at 509.
+Hunk #2 succeeded at 114.
+Hunk #3 succeeded at 223.
+Hunk #4 succeeded at 261.
+Hunk #5 succeeded at 387.
+Hunk #6 succeeded at 395.
+Hunk #7 succeeded at 432.
 Hmm...  The next patch looks like a unified diff to me...
 The text leading up to this was:
 --------------------------
-|diff -Nru netqmail-1.06/TARGETS netqmail-1.06_logmsg13/TARGETS
-|--- netqmail-1.06/TARGETS	1998-06-15 11:53:16.000000000 +0100
-|+++ netqmail-1.06_logmsg13/TARGETS	2009-08-31 22:30:46.000000000 +0100
+|--- qmail-spp.c	1970-01-01 01:00:00.000000000 +0100
+|+++ qmail-spp.c	2006-04-01 22:46:52.000000000 +0200
 --------------------------
-Patching file TARGETS using Plan A...
-Hunk #1 succeeded at 95 (offset -1 lines).
+(Creating file qmail-spp.c...)
+Patching file qmail-spp.c using Plan A...
+Empty context always matches.
+Hunk #1 succeeded at 1.
+Hmm...  The next patch looks like a unified diff to me...
+The text leading up to this was:
+--------------------------
+|--- qmail-spp.h	1970-01-01 01:00:00.000000000 +0100
+|+++ qmail-spp.h	2005-01-19 12:53:44.000000000 +0100
+--------------------------
+(Creating file qmail-spp.h...)
+Patching file qmail-spp.h using Plan A...
+Empty context always matches.
+Hunk #1 succeeded at 1.
 done
-make -C notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-smtpd-logging it
+make -C notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-netqmail-spp it
 ( cat warn-auto.sh;  echo CC=\'`head -1 conf-cc`\';  echo LD=\'`head -1 conf-ld`\'  ) > auto-ccld.sh
 cat auto-ccld.sh make-load.sh > make-load
 chmod 755 make-load
@@ -450,9 +430,9 @@ qmail-qmtpd.c:35: warning: incompatible implicit declaration of built-in functio
 ./load qmail-qmtpd rcpthosts.o control.o constmap.o  received.o date822fmt.o now.o qmail.o cdb.a fd.a wait.a  datetime.a open.a getln.a sig.a case.a env.a stralloc.a  alloc.a substdio.a error.a str.a fs.a auto_qmail.o 
 ./compile qmail-smtpd.c
 qmail-smtpd.c: In function 'main':
-qmail-smtpd.c:510: warning: return type of 'main' is not 'int'
-./compile errbits.c
-./load qmail-smtpd rcpthosts.o commands.o timeoutread.o  timeoutwrite.o ip.o ipme.o ipalloc.o control.o constmap.o  received.o date822fmt.o now.o qmail.o cdb.a fd.a wait.a  datetime.a getln.a open.a sig.a case.a env.a stralloc.a  errbits.o  alloc.a substdio.a error.a str.a fs.a auto_qmail.o  `cat  socket.lib`
+qmail-smtpd.c:430: warning: return type of 'main' is not 'int'
+./compile qmail-spp.c
+./load qmail-smtpd rcpthosts.o commands.o timeoutread.o  timeoutwrite.o ip.o ipme.o ipalloc.o control.o constmap.o  received.o date822fmt.o now.o qmail.o cdb.a fd.a wait.a  datetime.a getln.a open.a sig.a case.a qmail-spp.o env.a stralloc.a  alloc.a substdio.a error.a str.a fs.a auto_qmail.o  str.a `cat socket.lib`
 ./compile sendmail.c
 sendmail.c: In function 'main':
 sendmail.c:86: warning: return type of 'main' is not 'int'
@@ -587,4 +567,4 @@ cat binm3.sh  | sed s}QMAIL}"`head -1 conf-qmail`"}g  > binm3
 chmod 755 binm3
 cat binm3+df.sh  | sed s}QMAIL}"`head -1 conf-qmail`"}g  > binm3+df
 chmod 755 binm3+df
-success
+ok

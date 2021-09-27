@@ -1,32 +1,33 @@
-rm -rf notqmail-e77f33bd5f614e967b0716a72dd706462d36a477-badmailfrom-wildcard
+rm -rf notqmail-e77f33bd5f614e967b0716a72dd706462d36a477-badmailfrom-x-relayclient
 git -C notqmail.git fetch origin e77f33bd5f614e967b0716a72dd706462d36a477
 From https://github.com/notqmail/notqmail
  * branch            e77f33bd5f614e967b0716a72dd706462d36a477 -> FETCH_HEAD
-git -C notqmail.git archive --prefix=notqmail-e77f33bd5f614e967b0716a72dd706462d36a477-badmailfrom-wildcard/ e77f33bd5f614e967b0716a72dd706462d36a477 | tar xf -
-cd notqmail-e77f33bd5f614e967b0716a72dd706462d36a477-badmailfrom-wildcard; patch -f -p 1 <../patch/badmailfrom-wildcard.patch
+git -C notqmail.git archive --prefix=notqmail-e77f33bd5f614e967b0716a72dd706462d36a477-badmailfrom-x-relayclient/ e77f33bd5f614e967b0716a72dd706462d36a477 | tar xf -
+cd notqmail-e77f33bd5f614e967b0716a72dd706462d36a477-badmailfrom-x-relayclient; patch -f -p 1 <../patch/badmailfrom-x-relayclient.patch
 Hmm...  Looks like a unified diff to me...
 The text leading up to this was:
 --------------------------
-|If badmailfrom contains ".example.com" then reject mail from
-|"anything@any.thing.example.com"
+|This patch disables the badmailfrom check where RELAYCLIENT is set.
 |
-|http://tomclegg.net/qmail/qmail-badmailfrom-wildcard.patch
+|This allows you to put your own domain in badmailfrom, but still allow your
+|customers to relay through your mail server.
 |
-|--- qmail-smtpd.c~	Thu Apr 17 16:08:41 2003
-|+++ qmail-smtpd.c	Thu Apr 17 20:04:16 2003
+|Also Works with the qmail-smtpd-auth patch from http://members.elysium.pl/brush/qmail-smtpd-auth/
+|so your smtp authenticated users are also permitted to relay.
+|
+|The basic idea behind the need for this concept is so you can put your own domain in badmailfrom,
+|and still allow your trusted users to be able to send mail through your mail server.
+|
+|Jeremy Kitchen -- kitchen@scriptkitchen.com 12/23/2003
+|
+|diff -urN qmail-1.03.orig/qmail-smtpd.c qmail-1.03/qmail-smtpd.c
+|--- qmail-1.03.orig/qmail-smtpd.c	1998-06-15 05:53:16.000000000 -0500
+|+++ qmail-1.03/qmail-smtpd.c	2003-12-23 16:41:44.386786384 -0600
 --------------------------
 Patching file qmail-smtpd.c using Plan A...
-Hunk #1 succeeded at 203 (offset -12 lines).
-Hmm...  The next patch looks like a unified diff to me...
-The text leading up to this was:
---------------------------
-|--- /tmp/qmail-1.03/qmail-smtpd.8	Mon Jun 15 03:53:16 1998
-|+++ qmail-smtpd.8	Sun Aug  1 15:19:19 2004
---------------------------
-Patching file qmail-smtpd.8 using Plan A...
-Hunk #1 succeeded at 49.
+Hunk #1 succeeded at 240.
 done
-make -C notqmail-e77f33bd5f614e967b0716a72dd706462d36a477-badmailfrom-wildcard it
+make -C notqmail-e77f33bd5f614e967b0716a72dd706462d36a477-badmailfrom-x-relayclient it
 ( cat warn-auto.sh;  echo CC=\'`head -1 conf-cc`\';  echo LD=\'`head -1 conf-ld`\'  ) > auto-ccld.sh
 cat auto-ccld.sh make-load.sh > make-load
 chmod 755 make-load
@@ -397,7 +398,7 @@ qmail-qmtpd.c:81: warning: return type of 'main' is not 'int'
 ./load qmail-qmtpd rcpthosts.o control.o constmap.o  received.o date822fmt.o now.o qmail.o cdb.a fd.a wait.a  datetime.a open.a getln.a sig.a case.a env.a stralloc.a  alloc.a substdio.a error.a str.a fs.a auto_qmail.o 
 ./compile qmail-smtpd.c
 qmail-smtpd.c: In function 'main':
-qmail-smtpd.c:417: warning: return type of 'main' is not 'int'
+qmail-smtpd.c:412: warning: return type of 'main' is not 'int'
 ./load qmail-smtpd rcpthosts.o commands.o timeoutread.o  timeoutwrite.o ip.o ipme.o ipalloc.o control.o constmap.o  received.o date822fmt.o now.o qmail.o cdb.a fd.a wait.a  datetime.a getln.a open.a sig.a case.a env.a stralloc.a  alloc.a substdio.a error.a str.a fs.a auto_qmail.o  `cat  socket.lib`
 ./compile sendmail.c
 sendmail.c: In function 'main':
@@ -529,4 +530,4 @@ cat binm3.sh  | sed s}QMAIL}"`head -1 conf-qmail`"}g  > binm3
 chmod 755 binm3
 cat binm3+df.sh  | sed s}QMAIL}"`head -1 conf-qmail`"}g  > binm3+df
 chmod 755 binm3+df
-success
+ok

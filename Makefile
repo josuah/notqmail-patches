@@ -19,8 +19,8 @@ patches:v
 	 xargs -I {} -n 1 make BRANCH=${BRANCH} PATCH={}
 
 log:v \
-notqmail-${COMMIT}-${PATCH}.log
-notqmail-${COMMIT}-${PATCH}.log:
+log/${COMMIT}-${PATCH}.log
+log/${COMMIT}-${PATCH}.log:
 	@echo building $@
 	@-make build COMMIT=${COMMIT} PATCH=${PATCH} >$@.tmp 2>&1
 	@mv $@.tmp $@

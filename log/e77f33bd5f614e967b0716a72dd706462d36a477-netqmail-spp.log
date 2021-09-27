@@ -1,41 +1,69 @@
-rm -rf notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-rcptcheck
-git -C notqmail.git fetch origin aab15b1fea8a6c48953bf152a334d6a1840184c3
+rm -rf notqmail-e77f33bd5f614e967b0716a72dd706462d36a477-netqmail-spp
+git -C notqmail.git fetch origin e77f33bd5f614e967b0716a72dd706462d36a477
 From https://github.com/notqmail/notqmail
- * branch            aab15b1fea8a6c48953bf152a334d6a1840184c3 -> FETCH_HEAD
-git -C notqmail.git archive --prefix=notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-rcptcheck/ aab15b1fea8a6c48953bf152a334d6a1840184c3 | tar xf -
-cd notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-rcptcheck; patch -f -p 1 <../patch/rcptcheck.patch
-Hmm...  Looks like a new-style context diff to me...
+ * branch            e77f33bd5f614e967b0716a72dd706462d36a477 -> FETCH_HEAD
+git -C notqmail.git archive --prefix=notqmail-e77f33bd5f614e967b0716a72dd706462d36a477-netqmail-spp/ e77f33bd5f614e967b0716a72dd706462d36a477 | tar xf -
+cd notqmail-e77f33bd5f614e967b0716a72dd706462d36a477-netqmail-spp; patch -f -p 1 <../patch/netqmail-spp.patch
+Hmm...  Looks like a unified diff to me...
 The text leading up to this was:
 --------------------------
-|*** qmail-1.03.orig/qmail-smtpd.c	Mon Jun 15 06:53:16 1998
-|--- qmail-1.03/qmail-smtpd.c	Wed Jul 14 13:48:24 2004
+|--- Makefile	2004-08-10 11:45:55.000000000 +0200
+|+++ Makefile	2005-01-19 12:58:40.000000000 +0100
+--------------------------
+Patching file Makefile using Plan A...
+Hunk #1 succeeded at 1526 with fuzz 1 (offset -5 lines).
+Hunk #2 succeeded at 1557 (offset -1 lines).
+Hmm...  The next patch looks like a unified diff to me...
+The text leading up to this was:
+--------------------------
+|--- qmail-smtpd.c	2004-08-10 11:45:55.000000000 +0200
+|+++ qmail-smtpd.c	2006-04-01 22:22:59.000000000 +0200
 --------------------------
 Patching file qmail-smtpd.c using Plan A...
 Hunk #1 succeeded at 23.
-Hunk #2 succeeded at 48.
-Hunk #3 succeeded at 62 with fuzz 2.
-Hunk #4 succeeded at 86.
-Hunk #5 succeeded at 137.
-Hunk #6 succeeded at 223.
-Hunk #7 succeeded at 287.
+Hunk #2 succeeded at 114.
+Hunk #3 succeeded at 223.
+Hunk #4 succeeded at 261.
+Hunk #5 succeeded at 387.
+Hunk #6 succeeded at 395.
+Hunk #7 succeeded at 432.
+Hmm...  The next patch looks like a unified diff to me...
+The text leading up to this was:
+--------------------------
+|--- qmail-spp.c	1970-01-01 01:00:00.000000000 +0100
+|+++ qmail-spp.c	2006-04-01 22:46:52.000000000 +0200
+--------------------------
+(Creating file qmail-spp.c...)
+Patching file qmail-spp.c using Plan A...
+Empty context always matches.
+Hunk #1 succeeded at 1.
+Hmm...  The next patch looks like a unified diff to me...
+The text leading up to this was:
+--------------------------
+|--- qmail-spp.h	1970-01-01 01:00:00.000000000 +0100
+|+++ qmail-spp.h	2005-01-19 12:53:44.000000000 +0100
+--------------------------
+(Creating file qmail-spp.h...)
+Patching file qmail-spp.h using Plan A...
+Empty context always matches.
+Hunk #1 succeeded at 1.
 done
-make -C notqmail-aab15b1fea8a6c48953bf152a334d6a1840184c3-rcptcheck it
+make -C notqmail-e77f33bd5f614e967b0716a72dd706462d36a477-netqmail-spp it
 ( cat warn-auto.sh;  echo CC=\'`head -1 conf-cc`\';  echo LD=\'`head -1 conf-ld`\'  ) > auto-ccld.sh
 cat auto-ccld.sh make-load.sh > make-load
 chmod 755 make-load
-cat auto-ccld.sh find-systype.sh > find-systype
-chmod 755 find-systype
-./find-systype > systype
-( cat warn-auto.sh; ./make-load "`cat systype`" ) > load
+( cat warn-auto.sh; ./make-load ) > load
 chmod 755 load
 cat auto-ccld.sh make-compile.sh > make-compile
 chmod 755 make-compile
-( cat warn-auto.sh; ./make-compile "`cat systype`" ) >  compile
+( cat warn-auto.sh; ./make-compile ) >  compile
 chmod 755 compile
 ./compile qmail-local.c
 qmail-local.c: In function 'main':
-qmail-local.c:450: warning: return type of 'main' is not 'int'
+qmail-local.c:448: warning: return type of 'main' is not 'int'
 ./compile qmail.c
+( ( ./compile chkbiofl.c  && ./load chkbiofl &&  ./chkbiofl ) >/dev/null 2>&1  && cat oflops_bi.h || cat oflops_compat.h ) > oflops.h
+rm -f chkbiofl.o chkbiofl
 ./compile quote.c
 ./compile now.c
 now.c: In function 'now':
@@ -45,7 +73,7 @@ now.c:7: warning: passing argument 1 of 'time' from incompatible pointer type
 ./compile slurpclose.c
 cat auto-ccld.sh make-makelib.sh > make-makelib
 chmod 755 make-makelib
-( cat warn-auto.sh; ./make-makelib "`cat systype`" ) >  makelib
+( cat warn-auto.sh; ./make-makelib ) >  makelib
 chmod 755 makelib
 ./compile case_diffb.c
 ./compile case_diffs.c
@@ -113,7 +141,6 @@ rm -f trywaitp.o trywaitp
 ./compile stralloc_arts.c
 ./makelib stralloc.a stralloc_eady.o stralloc_pend.o  stralloc_copy.o stralloc_opys.o stralloc_opyb.o  stralloc_cat.o stralloc_cats.o stralloc_catb.o  stralloc_arts.o
 ./compile alloc.c
-alloc.c:3: warning: conflicting types for built-in function 'malloc'
 ./compile alloc_re.c
 ./makelib alloc.a alloc.o alloc_re.o
 ./compile strerr_sys.c
@@ -123,8 +150,11 @@ alloc.c:3: warning: conflicting types for built-in function 'malloc'
 ./compile substdi.c
 ./compile substdo.c
 ./compile subfderr.c
+subfderr.c:6: warning: initialization from incompatible pointer type
 ./compile subfdout.c
+subfdout.c:6: warning: initialization from incompatible pointer type
 ./compile subfdouts.c
+subfdouts.c:6: warning: initialization from incompatible pointer type
 ./compile subfdin.c
 ./compile subfdins.c
 ./compile substdio_copy.c
@@ -159,6 +189,7 @@ alloc.c:3: warning: conflicting types for built-in function 'malloc'
 ./compile datetime_un.c
 ./makelib datetime.a datetime.o datetime_un.o
 ./compile auto-str.c
+auto-str.c:6: warning: initialization from incompatible pointer type
 auto-str.c:9: warning: conflicting types for built-in function 'puts'
 auto-str.c: In function 'main':
 auto-str.c:17: warning: return type of 'main' is not 'int'
@@ -166,6 +197,7 @@ auto-str.c:17: warning: return type of 'main' is not 'int'
 ./auto-str auto_qmail `head -1 conf-qmail` > auto_qmail.c
 ./compile auto_qmail.c
 ./compile auto-int8.c
+auto-int8.c:8: warning: initialization from incompatible pointer type
 auto-int8.c:11: warning: conflicting types for built-in function 'puts'
 auto-int8.c: In function 'main':
 auto-int8.c:19: warning: return type of 'main' is not 'int'
@@ -175,8 +207,6 @@ auto-int8.c:19: warning: return type of 'main' is not 'int'
 ( ( ./compile trylsock.c &&  ./load trylsock -lsocket -lnsl ) >/dev/null 2>&1  && echo -lsocket -lnsl || exit 0 ) > socket.lib
 rm -f trylsock.o trylsock
 ./load qmail-local qmail.o quote.o now.o gfrom.o myctime.o  slurpclose.o case.a getln.a getopt.a sig.a open.a seek.a  lock.a fd.a wait.a env.a stralloc.a alloc.a strerr.a  substdio.a error.a str.a fs.a datetime.a auto_qmail.o  auto_patrn.o  `cat socket.lib`
-( ( ./compile tryulong32.c && ./load tryulong32 &&  ./tryulong32 ) >/dev/null 2>&1  && cat uint32.h2 || cat uint32.h1 ) > uint32.h
-rm -f tryulong32.o tryulong32
 ./compile qmail-lspawn.c
 ( ./compile trysysel.c >/dev/null 2>&1  && cat select.h2 || cat select.h1 ) > select.h
 rm -f trysysel.o trysysel
@@ -184,6 +214,7 @@ rm -f trysysel.o trysysel
 chkspawn.c: In function 'main':
 chkspawn.c:12: warning: return type of 'main' is not 'int'
 ./compile auto-int.c
+auto-int.c:8: warning: initialization from incompatible pointer type
 auto-int.c:11: warning: conflicting types for built-in function 'puts'
 auto-int.c: In function 'main':
 auto-int.c:19: warning: return type of 'main' is not 'int'
@@ -195,13 +226,6 @@ auto-int.c:19: warning: return type of 'main' is not 'int'
 ./compile spawn.c
 spawn.c: In function 'main':
 spawn.c:182: warning: return type of 'main' is not 'int'
-./compile chkshsgr.c
-chkshsgr.c: In function 'main':
-chkshsgr.c:3: warning: return type of 'main' is not 'int'
-./load chkshsgr 
-./chkshsgr || ( cat warn-shsgr; exit 1 )
-( ( ./compile tryshsgr.c  && ./load tryshsgr && ./tryshsgr ) >/dev/null 2>&1  && echo \#define HASSHORTSETGROUPS 1 || exit 0 ) >  hasshsgr.h
-rm -f tryshsgr.o tryshsgr
 ./compile prot.c
 ./compile coe.c
 ./compile cdb_hash.c
@@ -226,8 +250,12 @@ qmail-getpw.c:61: warning: return type of 'main' is not 'int'
 ./compile auto_usera.c
 ./load qmail-getpw case.a substdio.a error.a str.a fs.a  auto_break.o auto_usera.o 
 ./compile qmail-remote.c
+qmail-remote.c: In function 'saa_readyplus_internal':
+qmail-remote.c:37: warning: assignment from incompatible pointer type
+qmail-remote.c: At top level:
+qmail-remote.c:125: warning: initialization from incompatible pointer type
 qmail-remote.c: In function 'main':
-qmail-remote.c:332: warning: return type of 'main' is not 'int'
+qmail-remote.c:331: warning: return type of 'main' is not 'int'
 ./compile control.c
 ./compile constmap.c
 ./compile timeoutread.c
@@ -237,6 +265,8 @@ qmail-remote.c:332: warning: return type of 'main' is not 'int'
 ./compile dns.c
 ./compile ip.c
 ./compile ipalloc.c
+ipalloc.c: In function 'ipalloc_readyplus_internal':
+ipalloc.c:5: warning: assignment from incompatible pointer type
 ( ./compile trysalen.c >/dev/null 2>&1  && echo \#define HASSALEN 1 || exit 0 ) > hassalen.h
 rm -f trysalen.o
 ./compile ipme.c
@@ -248,7 +278,7 @@ rm -f tryrsolv.o tryrsolv
 ./load qmail-remote control.o constmap.o timeoutread.o  timeoutwrite.o timeoutconn.o tcpto.o now.o dns.o ip.o  ipalloc.o ipme.o quote.o ndelay.a case.a sig.a open.a  lock.a seek.a getln.a stralloc.a alloc.a substdio.a error.a  str.a fs.a auto_qmail.o  `cat dns.lib` `cat socket.lib`
 ./compile qmail-rspawn.c
 ./compile tcpto_clean.c
-./load qmail-rspawn spawn.o tcpto_clean.o now.o coe.o  sig.a open.a seek.a lock.a wait.a fd.a stralloc.a alloc.a  auto_qmail.o uid.o auto_userq.o substdio.a error.a str.a  auto_spawn.o
+./load qmail-rspawn spawn.o tcpto_clean.o now.o coe.o  sig.a open.a seek.a lock.a wait.a fd.a stralloc.a alloc.a  auto_qmail.o uid.o auto_userq.o substdio.a error.a env.a str.a  auto_spawn.o
 ( ./compile trydrent.c >/dev/null 2>&1  && cat direntry.h2 || cat direntry.h1 ) > direntry.h
 rm -f trydrent.o
 ./compile qmail-clean.c
@@ -262,12 +292,15 @@ qmail-clean.c:53: warning: return type of 'main' is not 'int'
 In file included from qmail-send.c:29:
 qsutil.h:5: warning: conflicting types for built-in function 'log2'
 qmail-send.c: In function 'main':
-qmail-send.c:1516: warning: return type of 'main' is not 'int'
+qmail-send.c:1513: warning: return type of 'main' is not 'int'
 ./compile qsutil.c
 In file included from qsutil.c:4:
 qsutil.h:5: warning: conflicting types for built-in function 'log2'
+qsutil.c:9: warning: initialization from incompatible pointer type
 ./compile newfield.c
 ./compile prioq.c
+prioq.c: In function 'prioq_readyplus_internal':
+prioq.c:4: warning: assignment from incompatible pointer type
 ( ( ./compile trymkffo.c && ./load trymkffo ) >/dev/null  2>&1  && echo \#define HASMKFIFO 1 || exit 0 ) > hasmkffo.h
 rm -f trymkffo.o trymkffo
 ./compile fifo.c
@@ -303,12 +336,16 @@ qmail-queue.c:161: warning: return type of 'main' is not 'int'
 ./compile auto_userd.c
 ./load qmail-queue triggerpull.o fmtqfn.o now.o  date822fmt.o datetime.a seek.a ndelay.a open.a sig.a  alloc.a auto_qmail.o auto_split.o uid.o auto_usera.o  auto_userd.o auto_users.o substdio.a error.a str.a fs.a
 ./compile qmail-inject.c
-qmail-inject.c:58: warning: conflicting types for built-in function 'puts'
+qmail-inject.c:57: warning: conflicting types for built-in function 'puts'
+qmail-inject.c: In function 'saa_readyplus_internal':
+qmail-inject.c:79: warning: assignment from incompatible pointer type
 qmail-inject.c: In function 'main':
-qmail-inject.c:688: warning: return type of 'main' is not 'int'
+qmail-inject.c:690: warning: return type of 'main' is not 'int'
 ./compile headerbody.c
 ./compile hfield.c
 ./compile token822.c
+token822.c: In function 'token822_readyplus_internal':
+token822.c:24: warning: assignment from incompatible pointer type
 ./load qmail-inject headerbody.o hfield.o newfield.o  quote.o now.o control.o date822fmt.o constmap.o qmail.o  case.a fd.a wait.a open.a getln.a sig.a getopt.a datetime.a  token822.o env.a stralloc.a alloc.a substdio.a error.a  str.a fs.a auto_qmail.o 
 ./compile predate.c
 predate.c: In function 'main':
@@ -336,26 +373,8 @@ qmail-newu.c:73: warning: return type of 'main' is not 'int'
 ./makelib cdbmake.a cdbmake_pack.o cdbmake_hash.o  cdbmake_add.o
 ./load qmail-newu cdbmss.o getln.a open.a seek.a cdbmake.a  case.a stralloc.a alloc.a substdio.a error.a str.a  auto_qmail.o 
 ./compile qmail-pw2u.c
-qmail-pw2u.c: In function 'die_chdir':
-qmail-pw2u.c:24: warning: incompatible implicit declaration of built-in function '_exit'
-qmail-pw2u.c: In function 'die_nomem':
-qmail-pw2u.c:29: warning: incompatible implicit declaration of built-in function '_exit'
-qmail-pw2u.c: In function 'die_read':
-qmail-pw2u.c:34: warning: incompatible implicit declaration of built-in function '_exit'
-qmail-pw2u.c: In function 'die_write':
-qmail-pw2u.c:39: warning: incompatible implicit declaration of built-in function '_exit'
-qmail-pw2u.c: In function 'die_control':
-qmail-pw2u.c:44: warning: incompatible implicit declaration of built-in function '_exit'
-qmail-pw2u.c: In function 'die_alias':
-qmail-pw2u.c:52: warning: incompatible implicit declaration of built-in function '_exit'
-qmail-pw2u.c: In function 'die_home':
-qmail-pw2u.c:60: warning: incompatible implicit declaration of built-in function '_exit'
-qmail-pw2u.c: In function 'die_user':
-qmail-pw2u.c:68: warning: incompatible implicit declaration of built-in function '_exit'
 qmail-pw2u.c: In function 'main':
-qmail-pw2u.c:251: warning: incompatible implicit declaration of built-in function '_exit'
-qmail-pw2u.c:312: warning: incompatible implicit declaration of built-in function '_exit'
-qmail-pw2u.c:235: warning: return type of 'main' is not 'int'
+qmail-pw2u.c:236: warning: return type of 'main' is not 'int'
 ./load qmail-pw2u constmap.o control.o open.a getln.a  case.a getopt.a stralloc.a alloc.a substdio.a error.a str.a  fs.a auto_usera.o auto_break.o auto_qmail.o 
 ./compile qmail-qread.c
 qmail-qread.c: In function 'main':
@@ -372,37 +391,37 @@ qmail-tcpok.c: In function 'main':
 qmail-tcpok.c:15: warning: return type of 'main' is not 'int'
 ./load qmail-tcpok open.a lock.a strerr.a substdio.a  error.a str.a auto_qmail.o 
 ./compile qmail-pop3d.c
-qmail-pop3d.c:48: warning: conflicting types for built-in function 'puts'
+qmail-pop3d.c:54: warning: conflicting types for built-in function 'puts'
 qmail-pop3d.c: In function 'main':
-qmail-pop3d.c:293: warning: return type of 'main' is not 'int'
+qmail-pop3d.c:303: warning: return type of 'main' is not 'int'
 ./compile commands.c
 ./compile maildir.c
 ./load qmail-pop3d commands.o case.a timeoutread.o  timeoutwrite.o maildir.o prioq.o now.o env.a strerr.a sig.a  open.a getln.a stralloc.a alloc.a substdio.a error.a str.a  fs.a  `cat socket.lib`
 ./compile qmail-popup.c
 qmail-popup.c:41: warning: conflicting types for built-in function 'puts'
 qmail-popup.c: In function 'main':
-qmail-popup.c:171: warning: return type of 'main' is not 'int'
+qmail-popup.c:170: warning: return type of 'main' is not 'int'
 ./load qmail-popup commands.o timeoutread.o timeoutwrite.o  now.o case.a fd.a sig.a wait.a stralloc.a alloc.a  substdio.a error.a str.a fs.a  `cat socket.lib`
 ./compile qmail-qmqpc.c
+qmail-qmqpc.c:55: warning: initialization from incompatible pointer type
+qmail-qmqpc.c: In function 'main':
+qmail-qmqpc.c:140: warning: return type of 'main' is not 'int'
 ./load qmail-qmqpc slurpclose.o timeoutread.o  timeoutwrite.o timeoutconn.o ip.o control.o auto_qmail.o  sig.a ndelay.a open.a getln.a substdio.a stralloc.a alloc.a  error.a str.a fs.a  `cat socket.lib`
 ./compile qmail-qmqpd.c
+qmail-qmqpd.c: In function 'main':
+qmail-qmqpd.c:112: warning: return type of 'main' is not 'int'
 ./compile received.c
 ./load qmail-qmqpd received.o now.o date822fmt.o qmail.o  auto_qmail.o env.a substdio.a sig.a error.a wait.a fd.a  str.a datetime.a fs.a 
 ./compile qmail-qmtpd.c
-qmail-qmtpd.c: In function 'badproto':
-qmail-qmtpd.c:16: warning: incompatible implicit declaration of built-in function '_exit'
-qmail-qmtpd.c: In function 'resources':
-qmail-qmtpd.c:17: warning: incompatible implicit declaration of built-in function '_exit'
-qmail-qmtpd.c: In function 'safewrite':
-qmail-qmtpd.c:23: warning: incompatible implicit declaration of built-in function '_exit'
-qmail-qmtpd.c: In function 'saferead':
-qmail-qmtpd.c:35: warning: incompatible implicit declaration of built-in function '_exit'
+qmail-qmtpd.c: In function 'main':
+qmail-qmtpd.c:81: warning: return type of 'main' is not 'int'
 ./compile rcpthosts.c
 ./load qmail-qmtpd rcpthosts.o control.o constmap.o  received.o date822fmt.o now.o qmail.o cdb.a fd.a wait.a  datetime.a open.a getln.a sig.a case.a env.a stralloc.a  alloc.a substdio.a error.a str.a fs.a auto_qmail.o 
 ./compile qmail-smtpd.c
 qmail-smtpd.c: In function 'main':
-qmail-smtpd.c:445: warning: return type of 'main' is not 'int'
-./load qmail-smtpd rcpthosts.o commands.o timeoutread.o  timeoutwrite.o ip.o ipme.o ipalloc.o control.o constmap.o  received.o date822fmt.o now.o qmail.o cdb.a fd.a wait.a  datetime.a getln.a open.a sig.a case.a env.a stralloc.a  alloc.a substdio.a error.a str.a fs.a auto_qmail.o  `cat  socket.lib`
+qmail-smtpd.c:430: warning: return type of 'main' is not 'int'
+./compile qmail-spp.c
+./load qmail-smtpd rcpthosts.o commands.o timeoutread.o  timeoutwrite.o ip.o ipme.o ipalloc.o control.o constmap.o  received.o date822fmt.o now.o qmail.o cdb.a fd.a wait.a  datetime.a getln.a open.a sig.a case.a qmail-spp.o env.a stralloc.a  alloc.a substdio.a error.a str.a fs.a auto_qmail.o  str.a `cat socket.lib`
 ./compile sendmail.c
 sendmail.c: In function 'main':
 sendmail.c:86: warning: return type of 'main' is not 'int'
@@ -420,23 +439,15 @@ cat warn-auto.sh config.sh  | sed s}QMAIL}"`head -1 conf-qmail`"}g  | sed s}BREA
 chmod 755 config
 cat warn-auto.sh config-fast.sh  | sed s}QMAIL}"`head -1 conf-qmail`"}g  | sed s}BREAK}"`head -1 conf-break`"}g  | sed s}SPLIT}"`head -1 conf-split`"}g  > config-fast
 chmod 755 config-fast
-./compile dnscname.c
-dnscname.c: In function 'main':
-dnscname.c:14: warning: return type of 'main' is not 'int'
-./compile dnsdoe.c
-./load dnscname dns.o dnsdoe.o ip.o ipalloc.o stralloc.a  alloc.a substdio.a error.a str.a fs.a  `cat dns.lib` `cat  socket.lib`
 ./compile dnsptr.c
 dnsptr.c: In function 'main':
 dnsptr.c:17: warning: return type of 'main' is not 'int'
+./compile dnsdoe.c
 ./load dnsptr dns.o dnsdoe.o ip.o ipalloc.o stralloc.a  alloc.a substdio.a error.a str.a fs.a  `cat dns.lib` `cat  socket.lib`
 ./compile dnsip.c
 dnsip.c: In function 'main':
 dnsip.c:18: warning: return type of 'main' is not 'int'
 ./load dnsip dns.o dnsdoe.o ip.o ipalloc.o stralloc.a  alloc.a substdio.a error.a str.a fs.a  `cat dns.lib` `cat  socket.lib`
-./compile dnsmxip.c
-dnsmxip.c: In function 'main':
-dnsmxip.c:20: warning: return type of 'main' is not 'int'
-./load dnsmxip dns.o dnsdoe.o ip.o ipalloc.o now.o  stralloc.a alloc.a substdio.a error.a str.a fs.a  `cat  dns.lib` `cat socket.lib`
 ./compile dnsfq.c
 dnsfq.c: In function 'main':
 dnsfq.c:16: warning: return type of 'main' is not 'int'
@@ -451,7 +462,7 @@ ipmeprint.c:10: warning: return type of 'main' is not 'int'
 ./load ipmeprint ipme.o ip.o ipalloc.o stralloc.a alloc.a  substdio.a error.a str.a fs.a  `cat socket.lib`
 ./compile qreceipt.c
 qreceipt.c: In function 'main':
-qreceipt.c:125: warning: return type of 'main' is not 'int'
+qreceipt.c:124: warning: return type of 'main' is not 'int'
 ./load qreceipt headerbody.o hfield.o quote.o token822.o  qmail.o getln.a fd.a wait.a sig.a env.a stralloc.a alloc.a  substdio.a error.a str.a auto_qmail.o 
 ./compile qsmhook.c
 qsmhook.c: In function 'main':
@@ -464,14 +475,18 @@ qbiff.c: In function 'main':
 qbiff.c:44: warning: return type of 'main' is not 'int'
 ./load qbiff headerbody.o hfield.o getln.a env.a open.a  stralloc.a alloc.a substdio.a error.a str.a 
 ./compile forward.c
+forward.c:23: warning: initialization from incompatible pointer type
 forward.c: In function 'main':
-forward.c:32: warning: return type of 'main' is not 'int'
+forward.c:31: warning: return type of 'main' is not 'int'
 ./load forward qmail.o strerr.a alloc.a fd.a wait.a sig.a  env.a substdio.a error.a str.a fs.a auto_qmail.o 
 ./compile preline.c
+preline.c:26: warning: initialization from incompatible pointer type
+preline.c:27: warning: initialization from incompatible pointer type
 preline.c: In function 'main':
 preline.c:32: warning: return type of 'main' is not 'int'
 ./load preline strerr.a fd.a wait.a sig.a env.a getopt.a  substdio.a error.a str.a 
 ./compile condredirect.c
+condredirect.c:26: warning: initialization from incompatible pointer type
 condredirect.c: In function 'main':
 condredirect.c:34: warning: return type of 'main' is not 'int'
 ./load condredirect qmail.o strerr.a fd.a sig.a wait.a  seek.a env.a substdio.a error.a str.a fs.a auto_qmail.o 
@@ -493,29 +508,29 @@ maildir2mbox.c:37: warning: return type of 'main' is not 'int'
 ./load maildir2mbox maildir.o prioq.o now.o myctime.o  gfrom.o lock.a getln.a env.a open.a strerr.a stralloc.a  alloc.a substdio.a error.a str.a fs.a datetime.a 
 ./compile maildirwatch.c
 maildirwatch.c: In function 'main':
-maildirwatch.c:62: warning: return type of 'main' is not 'int'
+maildirwatch.c:61: warning: return type of 'main' is not 'int'
 ./load maildirwatch hfield.o headerbody.o maildir.o  prioq.o now.o getln.a env.a open.a strerr.a stralloc.a  alloc.a substdio.a error.a str.a 
-cat warn-auto.sh qail.sh  | sed s}QMAIL}"`head -1 conf-qmail`"}g  | sed s}BREAK}"`head -1 conf-break`"}g  | sed s}SPLIT}"`head -1 conf-split`"}g  > qail
+cat warn-auto.sh deprecated.sh qail.sh  | sed s}QMAIL}"`head -1 conf-qmail`"}g  | sed s}BREAK}"`head -1 conf-break`"}g  | sed s}SPLIT}"`head -1 conf-split`"}g  > qail
 chmod 755 qail
-cat warn-auto.sh elq.sh  | sed s}QMAIL}"`head -1 conf-qmail`"}g  | sed s}BREAK}"`head -1 conf-break`"}g  | sed s}SPLIT}"`head -1 conf-split`"}g  > elq
+cat warn-auto.sh deprecated.sh elq.sh  | sed s}QMAIL}"`head -1 conf-qmail`"}g  | sed s}BREAK}"`head -1 conf-break`"}g  | sed s}SPLIT}"`head -1 conf-split`"}g  > elq
 chmod 755 elq
-cat warn-auto.sh pinq.sh  | sed s}QMAIL}"`head -1 conf-qmail`"}g  | sed s}BREAK}"`head -1 conf-break`"}g  | sed s}SPLIT}"`head -1 conf-split`"}g  > pinq
+cat warn-auto.sh deprecated.sh pinq.sh  | sed s}QMAIL}"`head -1 conf-qmail`"}g  | sed s}BREAK}"`head -1 conf-break`"}g  | sed s}SPLIT}"`head -1 conf-split`"}g  > pinq
 chmod 755 pinq
 echo './instpackage && ./instchown' > install
 chmod 755 install
 ./compile instpackage.c
 instpackage.c: In function 'main':
-instpackage.c:219: warning: return type of 'main' is not 'int'
+instpackage.c:209: warning: return type of 'main' is not 'int'
 ./compile hier.c
 ./load instpackage fifo.o hier.o auto_qmail.o auto_split.o  strerr.a substdio.a open.a error.a env.a str.a fs.a stralloc.a alloc.a
 ./compile instchown.c
 instchown.c: In function 'main':
-instchown.c:87: warning: return type of 'main' is not 'int'
+instchown.c:73: warning: return type of 'main' is not 'int'
 ./compile instuidgid.c
 ./load instchown instuidgid.o fifo.o hier.o auto_qmail.o auto_split.o  uid.o gid.o auto_usera.o auto_usero.o auto_userq.o auto_userr.o  auto_users.o auto_groupq.o strerr.a substdio.a error.a str.a fs.a
 ./compile instcheck.c
 instcheck.c: In function 'main':
-instcheck.c:106: warning: return type of 'main' is not 'int'
+instcheck.c:81: warning: return type of 'main' is not 'int'
 ./load instcheck instuidgid.o fifo.o hier.o auto_qmail.o auto_split.o  uid.o gid.o auto_usera.o auto_usero.o auto_userp.o auto_userq.o  auto_userr.o auto_users.o auto_groupq.o strerr.a substdio.a error.a  str.a fs.a
 cat home.sh  | sed s}QMAIL}"`head -1 conf-qmail`"}g  > home
 chmod 755 home
@@ -537,4 +552,4 @@ cat binm3.sh  | sed s}QMAIL}"`head -1 conf-qmail`"}g  > binm3
 chmod 755 binm3
 cat binm3+df.sh  | sed s}QMAIL}"`head -1 conf-qmail`"}g  > binm3+df
 chmod 755 binm3+df
-success
+ok
