@@ -1,0 +1,56 @@
+rm -rf notqmail-e77f33bd5f614e967b0716a72dd706462d36a477-spp-smtpauth-eh
+git -C notqmail.git fetch origin e77f33bd5f614e967b0716a72dd706462d36a477
+From https://github.com/notqmail/notqmail
+ * branch            e77f33bd5f614e967b0716a72dd706462d36a477 -> FETCH_HEAD
+git -C notqmail.git archive --prefix=notqmail-e77f33bd5f614e967b0716a72dd706462d36a477-spp-smtpauth-eh/ e77f33bd5f614e967b0716a72dd706462d36a477 | tar xf -
+cd notqmail-e77f33bd5f614e967b0716a72dd706462d36a477-spp-smtpauth-eh; patch -f -p 1 <../patch/spp-smtpauth-eh.patch
+Hmm...  Looks like a unified diff to me...
+The text leading up to this was:
+--------------------------
+|--- Makefile	2004-08-02 14:40:20.000000000 +0200
+|+++ Makefile	2005-01-19 12:59:54.000000000 +0100
+--------------------------
+Patching file Makefile using Plan A...
+Hunk #1 failed at 1535.
+Hunk #2 succeeded at 1550 with fuzz 2 (offset -10 lines).
+1 out of 2 hunks failed--saving rejects to Makefile.rej
+Hmm...  The next patch looks like a unified diff to me...
+The text leading up to this was:
+--------------------------
+|--- qmail-smtpd.c	2004-08-02 14:40:20.000000000 +0200
+|+++ qmail-smtpd.c	2006-04-01 22:21:52.000000000 +0200
+--------------------------
+Patching file qmail-smtpd.c using Plan A...
+Hunk #1 failed at 24.
+Hunk #2 succeeded at 114 (offset -14 lines).
+Hunk #3 failed at 223.
+Hunk #4 succeeded at 255 with fuzz 2 (offset -6 lines).
+Hunk #5 succeeded at 267 (offset -14 lines).
+Hunk #6 succeeded at 401 (offset -6 lines).
+Hunk #7 succeeded at 401 (offset -14 lines).
+No such line 609 in input file, ignoring
+Hunk #8 failed at 628.
+Hunk #9 succeeded at 447 (offset -235 lines).
+3 out of 9 hunks failed--saving rejects to qmail-smtpd.c.rej
+Hmm...  The next patch looks like a unified diff to me...
+The text leading up to this was:
+--------------------------
+|--- qmail-spp.c	1970-01-01 01:00:00.000000000 +0100
+|+++ qmail-spp.c	2006-04-01 22:47:53.000000000 +0200
+--------------------------
+(Creating file qmail-spp.c...)
+Patching file qmail-spp.c using Plan A...
+Empty context always matches.
+Hunk #1 succeeded at 1.
+Hmm...  The next patch looks like a unified diff to me...
+The text leading up to this was:
+--------------------------
+|--- qmail-spp.h	1970-01-01 01:00:00.000000000 +0100
+|+++ qmail-spp.h	2004-11-26 15:49:29.000000000 +0100
+--------------------------
+(Creating file qmail-spp.h...)
+Patching file qmail-spp.h using Plan A...
+Empty context always matches.
+Hunk #1 succeeded at 1.
+done
+*** Error 1 in . (Makefile:36 'notqmail-e77f33bd5f614e967b0716a72dd706462d36a477-spp-smtpauth-eh')

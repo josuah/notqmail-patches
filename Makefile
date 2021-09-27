@@ -21,8 +21,9 @@ patches:v
 log:v \
 notqmail-${COMMIT}-${PATCH}.log
 notqmail-${COMMIT}-${PATCH}.log:
-	-make build COMMIT=${COMMIT} PATCH=${PATCH} >$*.tmp 2>&1
-	mv $*.tmp $@
+	@echo building $@
+	@-make build COMMIT=${COMMIT} PATCH=${PATCH} >$@.tmp 2>&1
+	@mv $@.tmp $@
 
 build:v notqmail-${COMMIT}-${PATCH}
 	make -C notqmail-${COMMIT}-${PATCH} it
@@ -32,7 +33,7 @@ notqmail-${COMMIT}-${PATCH}:v notqmail.git
 	rm -rf $@
 	git -C notqmail.git fetch origin ${COMMIT}
 	git -C notqmail.git archive --prefix=$@/ ${COMMIT} | tar xf -
-	cd $@; patch -p1 <../patch/${PATCH}.patch
+	cd $@; patch -f -p 1 <../patch/${PATCH}.patch
 
 notqmail.git:
 	git clone --bare ${GIT} $@
