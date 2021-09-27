@@ -9,8 +9,8 @@ builds notqmail for each combination of patch and branch below.
 	<tr>
 		<th>patch</th>
 		<th><a href=/8c53cd40a3329d682a905decb1f8734fa1ba2e9a>master</a></th>
-		<th><a href=/e77f33bd5f614e967b0716a72dd706462d36a477>notqmail-1.08</a></th>
-		<th><a href=/aab15b1fea8a6c48953bf152a334d6a1840184c3>notqmail-1.07</a></th>
+		<th><a href=/e77f33bd5f614e967b0716a72dd706462d36a477>1.08</a></th>
+		<th><a href=/aab15b1fea8a6c48953bf152a334d6a1840184c3>1.07</a></th>
 	</tr>
 	<tr>
 		<td>badmailfrom-wildcard</td>

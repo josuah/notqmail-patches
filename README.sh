@@ -16,7 +16,7 @@ echo "	<tr>"
 echo "		<th>patch</th>"
 while read branch; do
 	commit=$(git -C notqmail.git rev-parse $branch)
-	echo "		<th><a href="$url/$commit">$branch</a></th>"
+	echo "		<th><a href="$url/$commit">${branch#notqmail-}</a></th>"
 done <conf-branch
 echo "	</tr>"
 
