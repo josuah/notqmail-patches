@@ -25,7 +25,7 @@ log/${COMMIT}-${PATCH}.log:
 
 build:v notqmail-${COMMIT}-${PATCH}
 	make -C notqmail-${COMMIT}-${PATCH} it
-	@echo success
+	@echo ok
 
 notqmail-${COMMIT}-${PATCH}:v notqmail.git
 	rm -rf $@
